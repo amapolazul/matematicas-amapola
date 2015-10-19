@@ -1,0 +1,169 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent" android:paddingLeft="0dp"
+    android:paddingRight="0dp"
+    android:paddingTop="0dp"
+    android:paddingBottom="0dp"
+    tools:context="matematicas_amapola.com.amapolazul.www.crazy123.logica.PreguntasQuizMatematicas"
+    android:background="@drawable/fondo">
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/imagenPReguntaActual"
+        android:src="@drawable/pregunta1"
+        android:layout_alignLeft="@+id/respuesta"
+        android:layout_alignStart="@+id/respuesta"
+        android:layout_marginTop="100dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/respuesta"
+        android:gravity="center|center_horizontal"
+        android:height="80dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginBottom="389dp"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:textSize="50dp"
+        android:textStyle="bold" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/imagenCero"
+        android:layout_marginTop="50dp"
+        android:src="@drawable/cero"
+        android:layout_marginLeft="90dp"
+        android:layout_marginStart="77dp"
+        android:layout_below="@+id/imagenPReguntaActual"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:onClick="presionaTeclado" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/imagenUno"
+        android:layout_alignTop="@+id/imagenCero"
+        android:layout_toRightOf="@+id/imagenCero"
+        android:layout_toEndOf="@+id/imagenCero"
+        android:src="@drawable/uno"
+        android:onClick="presionaTeclado"/>
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/imagenDos"
+        android:layout_alignTop="@+id/imagenUno"
+        android:layout_toRightOf="@+id/imagenUno"
+        android:layout_toEndOf="@+id/imagenUno"
+        android:src="@drawable/dos"
+        android:onClick="presionaTeclado"/>
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/imagenTres"
+        android:layout_alignTop="@+id/imagenDos"
+        android:layout_toRightOf="@+id/imagenDos"
+        android:layout_toEndOf="@+id/imagenDos"
+        android:src="@drawable/tres"
+        android:onClick="presionaTeclado"/>
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/imagenCuatro"
+        android:src="@drawable/cuatro"
+        android:layout_alignTop="@+id/imagenTres"
+        android:layout_toRightOf="@+id/imagenTres"
+        android:layout_toEndOf="@+id/imagenTres"
+        android:onClick="presionaTeclado"/>
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/imagenCinco"
+        android:src="@drawable/cinco"
+        android:layout_below="@+id/imagenCero"
+        android:layout_toLeftOf="@+id/imagenUno"
+        android:layout_toStartOf="@+id/imagenUno"
+        android:onClick="presionaTeclado"/>
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/imagenSeis"
+        android:layout_alignTop="@+id/imagenCinco"
+        android:layout_alignLeft="@+id/imagenUno"
+        android:layout_alignStart="@+id/imagenUno"
+        android:src="@drawable/seis"
+        android:onClick="presionaTeclado"/>
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/imagenSiete"
+        android:layout_alignTop="@+id/imagenSeis"
+        android:layout_toRightOf="@+id/imagenSeis"
+        android:layout_toEndOf="@+id/imagenSeis"
+        android:src="@drawable/siete"
+        android:onClick="presionaTeclado"/>
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/imagenOcho"
+        android:layout_alignTop="@+id/imagenSiete"
+        android:layout_alignLeft="@+id/imagenTres"
+        android:layout_alignStart="@+id/imagenTres"
+        android:src="@drawable/ocho"
+        android:onClick="presionaTeclado"/>
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/imagenNueve"
+        android:layout_alignTop="@+id/imagenOcho"
+        android:layout_toRightOf="@+id/imagenOcho"
+        android:layout_toEndOf="@+id/imagenOcho"
+        android:src="@drawable/nueve"
+        android:onClick="presionaTeclado"/>
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/imageView10"
+        android:layout_below="@+id/imagenCinco"
+        android:layout_toRightOf="@+id/imagenCinco"
+        android:layout_toEndOf="@+id/imagenCinco"
+        android:src="@drawable/borrar"
+        android:onClick="limpiarRespuesta" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/imageView11"
+        android:layout_alignTop="@+id/imageView10"
+        android:layout_toRightOf="@+id/imageView10"
+        android:layout_toEndOf="@+id/imageView10"
+        android:src="@drawable/comprobar"
+        android:onClick="comprobarRespuesta" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/imageView"
+        android:src="@drawable/cerrar"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginBottom="1125dp"
+        android:layout_marginRight="20dp"
+        android:onClick="cerrar" />
+
+</RelativeLayout>
