@@ -55,6 +55,7 @@ public class PreguntasQuizMatematicas extends Activity {
             quizDao = new QuizDAO(this);
             quizDao.open();
             preguntas = quizDao.darPreguntas();
+            indicePrguntaActual = quizDao.darIdPreguntaActual() - 1;
             inicializarQuiz();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -81,6 +82,7 @@ public class PreguntasQuizMatematicas extends Activity {
             sonidoCorrecto.start();
             indicePrguntaActual++;
             if(indicePrguntaActual < preguntas.size()){
+                quizDao.actualizarPreguntaActual(preguntas.get(indicePrguntaActual).getId().toString());
                 inicializarQuiz();
             } else {
                 Intent intent = new Intent(this, Finalizar.class);
@@ -89,8 +91,6 @@ public class PreguntasQuizMatematicas extends Activity {
         } else {
             sonidoIncorrecta.start();
         }
-
-
     }
 
     public void cerrar(View view) {
@@ -134,6 +134,12 @@ public class PreguntasQuizMatematicas extends Activity {
                 break;
         }
         campoRespuesta.setText(respuesta.toString());
+    }
+
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
     }
 
     @Override

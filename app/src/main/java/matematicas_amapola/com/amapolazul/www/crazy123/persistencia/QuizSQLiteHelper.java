@@ -14,9 +14,12 @@ public class QuizSQLiteHelper extends SQLiteOpenHelper {
     public static final String NOMBRE_COLUMNA_IMAGEN = "imagen";
     public static final String NOMBRE_COLUMNA_RESPUESTA_CORRECTA = "respuesta_correcta";
 
+    public static final String QUIZ_PREGUNTA_ACTUAL = "id_pregunta_actual";
+    public static final String TABLA_PREGUNTA_ACTUAL = "preguntaactual";
+
 
     private static final String DATABASE_NAME = "matematicas.db";
-    private static final int DATABASE_VERSION = 1;
+    private static final int DATABASE_VERSION = 2;
 
     // Database creation sql statement
     private static final String DATABASE_CREATE = "create table "
@@ -26,18 +29,25 @@ public class QuizSQLiteHelper extends SQLiteOpenHelper {
             + " text not null" +
             ");";
 
+    private static final String DATA_BASE_FASE_2 = "create table " + TABLA_PREGUNTA_ACTUAL + "(" + QUIZ_PREGUNTA_ACTUAL
+            +" integer not null" +
+            ");";
+
     public QuizSQLiteHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
+
     }
 
     @Override
     public void onCreate(SQLiteDatabase database) {
         database.execSQL(DATABASE_CREATE);
+        database.execSQL(DATA_BASE_FASE_2);
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         db.execSQL("DROP TABLE IF EXISTS " + NOMBRE_TABLA);
+        db.execSQL("DROP TABLE IF EXISTS " + TABLA_PREGUNTA_ACTUAL);
         onCreate(db);
     }
 }

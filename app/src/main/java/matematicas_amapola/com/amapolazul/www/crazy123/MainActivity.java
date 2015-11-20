@@ -44,6 +44,7 @@ public class MainActivity extends Activity {
                     quizDao.crearPregunta(pregunta);
                 }
             }
+            quizDao.insertarPreguntaActual("1");
             cerrarDialogo();
         } catch (SQLException e) {
             e.printStackTrace();

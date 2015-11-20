@@ -45,6 +45,7 @@ public class QuizDAO {
 
     /**
      * Devuelvelas preguntas
+     *
      * @return
      */
     public List<Pregunta> darPreguntas() {
@@ -61,6 +62,48 @@ public class QuizDAO {
         } else {
             return null;
         }
+    }
+
+    public Pregunta darPreguntaPorId(String id) {
+        String query = "SELECT * FROM " + QuizSQLiteHelper.TABLA_PREGUNTA_ACTUAL + "where _id = ?";
+        Cursor c = database.rawQuery(query, new String[]{id});
+        Pregunta pretuntaResultado;
+        if (c.moveToFirst()) {
+            pretuntaResultado = cursorToPregunta(c);
+            c.moveToNext();
+            return pretuntaResultado;
+        } else {
+            return null;
+        }
+    }
+
+    public int darIdPreguntaActual() {
+        String query = "SELECT * FROM " + QuizSQLiteHelper.TABLA_PREGUNTA_ACTUAL;
+        Cursor c = database.rawQuery(query, null);
+        int result;
+        if (c.moveToFirst()) {
+            result = c.getInt(0);
+            c.moveToNext();
+            return result;
+        } else {
+            return 1;
+        }
+    }
+
+    public int actualizarPreguntaActual(String idPreguntaActual){
+        ContentValues values = new ContentValues();
+        values.put(QuizSQLiteHelper.QUIZ_PREGUNTA_ACTUAL, idPreguntaActual);
+        int update = database.update(QuizSQLiteHelper.TABLA_PREGUNTA_ACTUAL,
+                values,  "id_pregunta_actual "+"="+(Integer.parseInt(idPreguntaActual) - 1), null);
+        return update;
+    }
+
+    public long insertarPreguntaActual(String idPreguntaActual){
+        ContentValues values = new ContentValues();
+        values.put(QuizSQLiteHelper.QUIZ_PREGUNTA_ACTUAL, idPreguntaActual);
+        long insert = database.insert(QuizSQLiteHelper.TABLA_PREGUNTA_ACTUAL,
+                null, values);
+        return insert;
     }
 
     public void removeAll() {
