@@ -11,7 +11,6 @@ import android.view.MenuItem;
 import matematicas_amapola.com.amapolazul.www.crazy123.R;
 
 public class IntroUno extends Activity {
-
     private static int SPLASH_TIME_OUT = 2000;
 
     @Override
@@ -40,6 +39,7 @@ public class IntroUno extends Activity {
             }
         }, SPLASH_TIME_OUT);
     }
+
 
 
     @Override

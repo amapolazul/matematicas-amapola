@@ -2,7 +2,10 @@ package matematicas_amapola.com.amapolazul.www.crazy123;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.os.AsyncTask;
+import android.os.Handler;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -20,44 +23,57 @@ import matematicas_amapola.com.amapolazul.www.crazy123.utilidades.Utils;
 
 public class MainActivity extends Activity {
 
-    private QuizDAO quizDao;
     private ProgressDialog pd;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        try{
-            quizDao = new QuizDAO(this);
-            quizDao.open();
-            int[] respuestas = Utils.darRespuestasCorrectas();
-            int[] preguntasIds = Utils.darImagenesId();
-            List<Pregunta> preguntas = quizDao.darPreguntas();
-            pd = new ProgressDialog(this);
-            mostrarDialogo();
-            if(preguntas == null || preguntas.isEmpty()){
-                for(int i = 0; i < respuestas.length; i++){
-                    System.out.println("guardando pregunta " + i);
-                    Pregunta pregunta = new Pregunta();
-                    pregunta.setImagen(preguntasIds[i]);
-                    pregunta.setRespuestaCorrecta(String.valueOf(respuestas[i]));
-                    quizDao.crearPregunta(pregunta);
-                }
-            }
-            quizDao.insertarPreguntaActual("1");
-            cerrarDialogo();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
-
-    private void mostrarDialogo(){
-        pd.setMessage("Cargando");
+        pd = new ProgressDialog(this);
+        pd.setMessage("Cargando preguntas");
+        pd.setTitle("Crazy 123");
         pd.show();
+        new CargarPreguntasThread(this).execute();
+
     }
 
-    private void cerrarDialogo(){
-        pd.dismiss();
+    private class CargarPreguntasThread extends AsyncTask<Void, Void, Void> {
+
+        private QuizDAO quizDao;
+
+        public CargarPreguntasThread(Context context){
+            System.out.println(context);
+            quizDao = new QuizDAO(context);
+        }
+
+        protected Void doInBackground(Void... args) {
+            try{
+                quizDao.open();
+                int[] respuestas = Utils.darRespuestasCorrectas();
+                int[] preguntasIds = Utils.darImagenesId();
+                //quizDao.removeAll();
+                List<Pregunta> preguntas = quizDao.darPreguntas();
+                if(preguntas == null || preguntas.isEmpty()){
+                    for(int i = 0; i < respuestas.length; i++){
+                        System.out.println("guardando pregunta " + i);
+                        Pregunta pregunta = new Pregunta();
+                        pregunta.setImagen(preguntasIds[i]);
+                        pregunta.setRespuestaCorrecta(String.valueOf(respuestas[i]));
+                        quizDao.crearPregunta(pregunta);
+                    }
+                    quizDao.insertarPreguntaActual("0");
+                }
+                pd.dismiss();
+
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+            return null;
+        }
+
+        protected void onPostExecute(Void result) {
+
+        }
     }
 
     public void irAPreguntas(View view){

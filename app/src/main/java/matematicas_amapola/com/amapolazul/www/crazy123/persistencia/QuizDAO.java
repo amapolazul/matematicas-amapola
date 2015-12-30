@@ -109,6 +109,7 @@ public class QuizDAO {
     public void removeAll() {
         SQLiteDatabase db = dbHelper.getWritableDatabase();
         db.delete(QuizSQLiteHelper.NOMBRE_TABLA, null, null);
+        db.delete(QuizSQLiteHelper.TABLA_PREGUNTA_ACTUAL, null, null);
     }
 
     private Pregunta cursorToPregunta(Cursor cursor) {

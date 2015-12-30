@@ -2,6 +2,8 @@ package matematicas_amapola.com.amapolazul.www.crazy123.logica;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.res.Resources;
+import android.graphics.drawable.Drawable;
 import android.media.MediaPlayer;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
@@ -55,13 +57,20 @@ public class PreguntasQuizMatematicas extends Activity {
             quizDao = new QuizDAO(this);
             quizDao.open();
             preguntas = quizDao.darPreguntas();
-            indicePrguntaActual = quizDao.darIdPreguntaActual() - 1;
+            indicePrguntaActual = quizDao.darIdPreguntaActual();
             inicializarQuiz();
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
 
+    private Drawable getIdDrawableByName(String name){
+        Resources res = getResources();
+        String mDrawableName = name;
+        int resID = res.getIdentifier(mDrawableName , "drawable", getPackageName());
+        Drawable drawable = res.getDrawable(resID );
+        return drawable;
+    }
 
     private void inicializarQuiz(){
         preguntaActual = preguntas.get(indicePrguntaActual);
@@ -82,7 +91,7 @@ public class PreguntasQuizMatematicas extends Activity {
             sonidoCorrecto.start();
             indicePrguntaActual++;
             if(indicePrguntaActual < preguntas.size()){
-                quizDao.actualizarPreguntaActual(preguntas.get(indicePrguntaActual).getId().toString());
+                quizDao.actualizarPreguntaActual(String.valueOf(indicePrguntaActual));
                 inicializarQuiz();
             } else {
                 Intent intent = new Intent(this, Finalizar.class);

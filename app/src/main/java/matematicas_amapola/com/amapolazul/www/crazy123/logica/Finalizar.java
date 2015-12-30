@@ -8,20 +8,37 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
+import java.sql.SQLException;
+
 import matematicas_amapola.com.amapolazul.www.crazy123.MainActivity;
 import matematicas_amapola.com.amapolazul.www.crazy123.R;
+import matematicas_amapola.com.amapolazul.www.crazy123.persistencia.QuizDAO;
 
 public class Finalizar extends Activity {
+
+    private QuizDAO quizDao;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_finalizar);
+
+        quizDao = new QuizDAO(this);
+
+
     }
 
     public void volver(View view) {
-        Intent intent = new Intent(this, MainActivity.class);
-        startActivity(intent);
+        try {
+            quizDao.open();
+            quizDao.removeAll();
+            Intent intent = new Intent(this, MainActivity.class);
+            startActivity(intent);
+            quizDao.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
     }
 
 
